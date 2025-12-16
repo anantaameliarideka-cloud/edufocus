@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Belajar</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+    <div class="topbar">
+        <div class="brand">📊 Progress Belajarku</div>
+        <a href="/dashboard" class="timer">⬅ Dashboard</a>
+    </div>
+
+    <div class="panel">
+
+        <div class="panel-title">Ringkasan</div>
+
+        <div class="grid">
+
+            <div class="menu-card small">
+                <div class="icon">⏱️</div>
+                <h3>Total Sesi Belajar</h3>
+                <p>{{ total_belajar }} sesi</p>
+            </div>
+
+            <div class="menu-card small">
+                <div class="icon">📝</div>
+                <h3>Total Soal Dikerjakan</h3>
+                <p>{{ total_soal }} soal</p>
+            </div>
+
+            <div class="menu-card small">
+                <div class="icon">🎯</div>
+                <h3>Skor UTBK Terakhir</h3>
+                <p>{{ skor }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

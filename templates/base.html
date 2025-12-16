@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>EduFocus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='timer.js') }}" defer></script>
+</head>
+<body>
+
+<div class="wrap">
+    {% if show_topbar %}
+<div class="topbar">
+    <div class="brand">📚 EduFocus</div>
+    <div id="timer" class="timer">25:00</div>
+</div>
+{% endif %}
+
+
+    <!-- MAIN PANEL -->
+    <div class="panel">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Belajar</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <div class="brand">📘 Study Dashboard</div>
+        <div class="timer" id="timer">25:00</div>
+    </div>
+
+    <!-- PANEL -->
+    <div class="panel">
+        <div class="panel-title">Menu Belajar</div>
+
+        <!-- GRID MENU -->
+        <div class="grid">
+
+            <a href="/belajar" class="menu-card">
+                <div class="icon">⏱️</div>
+                <h3>Belajar Fokus</h3>
+                <p>Pomodoro + materi</p>
+            </a>
+
+            <a href="/motivasi" class="menu-card">
+        <div class="icon">💡</div>
+        <h3>Motivasi Harian</h3>
+        <p>Inspirasi & semangat harian</p>
+    </a>
+
+            </a>
+
+            <a href="/utbk" class="menu-card">
+                <div class="icon">🎯</div>
+                <h3>UTBK</h3>
+                <p>TPS • Literasi • Numerasi</p>
+            </a>
+
+            <a href="/progress" class="menu-card">
+                <div class="icon">📊</div>
+                <h3>Progress</h3>
+                <p>Lihat perkembanganmu</p>
+            </a>
+
+            <a href="/deadline" class="menu-card deadline-card">
+                <div class="icon">⏰</div>
+                <h3>Deadline</h3>
+                <p>Tambah & cek tugas</p>
+            </a>
+
+        </div>
+
+        <!-- DEADLINE LIST -->
+        {% if deadlines %}
+        <div class="panel-title" style="margin-top:30px">Deadline Terdekat</div>
+
+        <div class="grid">
+            {% for d in deadlines %}
+            <div class="menu-card small">
+                <div class="icon">📌</div>
+                <h3>{{ d.judul }}</h3>
+                <p>{{ d.tanggal }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+<script>
+let time = 1500;
+setInterval(() => {
+    let m = Math.floor(time / 60);
+    let s = time % 60;
+    document.getElementById("timer").innerText =
+        `${m}:${s < 10 ? '0' : ''}${s}`;
+    time--;
+    if (time < 0) time = 1500;
+}, 1000);
+</script>
+
+</body>
+</html>

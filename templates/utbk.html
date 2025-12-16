@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UTBK</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='utbk.css') }}">
+</head>
+<body>
+<div class="wrap">
+<header class="header">
+  <div class="brand">UTBK</div>
+  <div id="timer">00:00</div>
+</header>
+
+<main>
+  {% if not submit %}
+  <!-- Subtest list -->
+  <div id="subtest-list" class="subtest-list">
+    <h2>Pilih Subtest</h2>
+    {% for sub in soal.keys() %}
+      <button class="btn primary subtest-btn" onclick="showSoal('{{ sub }}')">{{ sub }}</button>
+    {% endfor %}
+  </div>
+
+  <!-- Soal container -->
+  <div id="soal-container" style="display:none;">
+    <h2 class="subtest-title" id="subtest-title"></h2>
+    <form method="post" id="quizForm">
+      <input type="hidden" name="subtest" id="subtest-name">
+      <div id="soal-list"></div>
+      <div class="form-actions">
+        <button type="submit" class="btn primary">Submit</button>
+        <button type="button" class="btn secondary" onclick="backToSubtest()">Kembali</button>
+      </div>
+    </form>
+  </div>
+  {% else %}
+    <!-- Hasil skor -->
+    <div class="result">
+      <h3>Subtest: {{ subtest }}</h3>
+      <h3>Skor kamu: {{ skor }} / {{ soal[subtest]|length }}</h3>
+      <a href="{{ url_for('utbk') }}" class="btn primary">Kembali ke Subtest</a>
+    </div>
+  {% endif %}
+</main>
+</div>
+
+<script>
+let soalData = {{ soal|tojson }};
+let timerEl = document.getElementById('timer');
+let seconds = 0;
+setInterval(()=>{
+  seconds++;
+  let m = String(Math.floor(seconds/60)).padStart(2,'0');
+  let s = String(seconds%60).padStart(2,'0');
+  timerEl.textContent = m+":"+s;
+},1000);
+
+function showSoal(sub){
+  document.getElementById('subtest-list').style.display='none';
+  document.getElementById('soal-container').style.display='block';
+  document.getElementById('subtest-title').textContent=sub;
+  document.getElementById('subtest-name').value=sub;
+
+  let soalListEl = document.getElementById('soal-list');
+  soalListEl.innerHTML='';
+  soalData[sub].forEach((s,i)=>{
+    let html = `<div class="question-card">
+      <p><strong>Soal ${i+1}:</strong> ${s.soal}</p>
+      <div class="options">`;
+    s.opsi.forEach((o,j)=>{
+      html+=`<label class="option"><input type="radio" name="q${i}" value="${j}" required> ${o}</label>`;
+    });
+    html+='</div></div>';
+    soalListEl.innerHTML+=html;
+  });
+}
+
+function backToSubtest(){
+  document.getElementById('soal-container').style.display='none';
+  document.getElementById('subtest-list').style.display='block';
+}
+</script>
+</body>
+</html>

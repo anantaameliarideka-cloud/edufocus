@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Motivasi Harian</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .motivasi-card {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f0f8ff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .motivasi-card h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .motivasi-card p {
+            font-size: 20px;
+            color: #333;
+        }
+        .btn-back {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-back:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="motivasi-card">
+    <h2>💡 Motivasi Hari Ini</h2>
+    <p>"{{ kata }}"</p>
+    <a href="/dashboard" class="btn-back">Kembali ke Dashboard</a>
+</div>
+
+</body>
+</html>
